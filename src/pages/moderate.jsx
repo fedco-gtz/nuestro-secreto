@@ -48,7 +48,7 @@ function Moderate() {
 
   return (
     <div className="moderate-container">
-      <h1>SECRETOS PENDIENTES DE APROBACIÓN</h1>
+      <h1 className="mobile">SECRETOS PENDIENTES DE APROBACIÓN</h1>
       {pending.map((s) => (
         <div key={s.id} className="secret-card">
           <span className="secret-id">

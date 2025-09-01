@@ -1,5 +1,3 @@
-/* Moderate.css */
-
 .moderate-container {
   max-width: 800px;
   margin: 40px auto;
@@ -58,4 +56,12 @@
 
 .vote-btn:hover {
   background-color: #ff8c5e;
+}
+
+@media screen and (min-width:320px) and (max-width: 768px) {
+
+  .mobile {
+    font-size: 22px;
+  }
+
 }
