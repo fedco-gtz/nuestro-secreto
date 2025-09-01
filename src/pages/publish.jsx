@@ -46,6 +46,11 @@ function Publish() {
       setSex("");
       setName("");
 
+      toast.success("¡Tu secreto fue publicado con éxito!", {
+        theme: "dark",
+        autoClose: 1500,
+      });
+
       fetchSecrets();
     } catch (error) {
       alert(error.message);
