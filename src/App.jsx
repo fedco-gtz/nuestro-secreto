@@ -9,9 +9,9 @@ import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 
 // PÁGINAS
-import Published from './pages/published'
-import Publish from './pages/publish'
-import Moderate from './pages/moderate'
+import Published from './pages/published';
+import Publish from './pages/publish';
+import Moderate from './pages/moderate';
 import Tyc from './pages/tyc';
 import NotFound from './pages/NotFound';
 
