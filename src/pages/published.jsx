@@ -45,13 +45,14 @@ function Published() {
     <div className="published-container">
       <h1>SECRETOS PUBLICADOS</h1>
       {approved.map((s) => (
-        <div key={s.id} className={`secret-card ${getSexClass(s.sex)}`}>
-          <span className="secret-id">{s.age} años</span>
+        <div key={s.id} className={`secret-card secret-header ${getSexClass(s.sex)}`}>
+          <span className="secret-id secred-card-info">{s.name}</span>
+          <span className="secret-id">({s.age} AÑOS)</span>
           <span className="secret-id">
             #{String(s.number).padStart(6, "0")}
           </span>
-          <span className="secret-id"> {s.country} </span>
-          <hr></hr>
+          <span className="secret-id secred-card-info"> {s.country} </span>
+          <hr className={`hr ${getSexClass(s.sex)}`}></hr>
           <span className="secret-id"> {s.text} </span>
           {s.content}
         </div>
