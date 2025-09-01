@@ -92,3 +92,12 @@
   color: blue;
   transform: scale(1.2);
 }
+
+@media screen and (min-width:320px) and (max-width: 768px) {
+.secred-card-info {
+    text-transform: uppercase;
+    margin-left: 14%;
+    font-size: 14px;
+}
+
+}
