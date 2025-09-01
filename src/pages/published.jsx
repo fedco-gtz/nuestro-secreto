@@ -62,7 +62,7 @@ function Published() {
 
   return (
     <div className="published-container">
-      <h1>SECRETOS PUBLICADOS</h1>
+      <h1 className="mobile">SECRETOS PUBLICADOS</h1>
       {approved.map((s) => (
         <div key={s.id} className={`secret-card secret-header ${getSexClass(s.sex)}`}>
 
