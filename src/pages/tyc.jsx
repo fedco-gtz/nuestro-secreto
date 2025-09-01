@@ -4,7 +4,7 @@ import "../styles/Moderate.css";
 function Tyc() {
     return (
         <>
-            <div className="moderate-container">
+            <div className="moderate-container mobile">
                 <h1>TÉRMINOS Y CONDICIONES DE USO</h1>
 
                 <p>Bienvenido/a a <strong>NUESTRO SECRETO</strong> (en adelante, “el Sitio”).

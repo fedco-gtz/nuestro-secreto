@@ -78,4 +78,9 @@ header .text {
     width: 50%;
     height: 50%;
   }
+
+  .notFoundContainer {
+      font-size: 26px;
+      width: 20vh;
+  }
 }
