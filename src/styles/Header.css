@@ -1,0 +1,81 @@
+.header {
+  background-image: url("../images/headerImage.jpg");
+  background-size: cover;
+  text-align: center;
+}
+
+.header .logo {
+  width: 30%;
+  height: auto;
+  margin-top: 30px;
+}
+
+.header .caption {
+  color: rgba(255, 255, 255, 0.87);
+  text-shadow: 5px 5px 5px rgb(0, 0, 0);
+  font-size: 30px;
+  margin-top: -57px;
+  padding-bottom: 30px;
+  -webkit-text-stroke: 2.5px rgb(0, 0, 0);
+}
+
+header .text {
+  background-color: rgb(0, 0, 0);
+  color: rgba(255, 255, 255, 0.87);
+  text-align: center;
+}
+
+.underConstruction {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+  height: 80%;
+}
+
+.notFoundContainer{
+  display: block;
+  background-color: rgb(36, 36, 36);
+  padding: 8px 16px;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto; 
+  width: 38vh;
+  font-size: 32px;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  border: 2px solid rgb(36, 36, 36);
+}
+
+.notFoundContainer:hover{
+  background-color:#ffbd59;
+  color: rgb(36, 36, 36);
+  border: 2px solid rgb(36, 36, 36);
+}
+
+@media screen and (min-width:320px) and (max-width: 768px) {
+  .header .logo {
+    width: 70%;
+    height: auto;
+    margin-top: 30px;
+  }
+
+  .header .caption {
+    display: none;
+  }
+
+  header .text {
+    background-color: rgb(0, 0, 0);
+    color: rgba(255, 255, 255, 0.87);
+    text-align: center;
+    font-size: 14px;
+  }
+
+  .underConstruction {
+    margin-left: 25%;
+    margin-top: 15%;
+    width: 50%;
+    height: 50%;
+  }
+}

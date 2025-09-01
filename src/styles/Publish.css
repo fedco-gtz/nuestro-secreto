@@ -1,0 +1,73 @@
+.publish-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif;
+}
+
+.publish-container h2 {
+  text-align: center;
+  color: #ff6b35;
+  margin-bottom: 20px;
+}
+
+.publish-container label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.publish-container input[type="text"],
+.publish-container input[type="number"],
+.publish-container select,
+.publish-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ffbd59;
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.publish-container input[type="text"]:focus,
+.publish-container input[type="number"]:focus,
+.publish-container select:focus,
+.publish-container textarea:focus {
+  border-color: #ff6b35;
+  outline: none;
+}
+
+.publish-container textarea {
+  resize: none;
+}
+
+.publish-container input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+.publish-container button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: #ff6b35;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.publish-container button:hover {
+  background-color: #ff8c5e;
+}
+
+.publish-container br {
+  line-height: 10px;
+}
