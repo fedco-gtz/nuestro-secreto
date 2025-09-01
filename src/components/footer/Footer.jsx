@@ -20,11 +20,7 @@ function Footer() {
                 <section className='footerSection'>
                     <p><i></i>Contacto: <a href="mailto:gutierrezfedericog@gmail.com">info@nuestro-secreto.com</a></p>
                     <p><a href="tyc" target="_blank" rel="noopener noreferrer">Términos y Condiciones</a></p>
-                    <p>
-                        <Link to="/tyc" target="_blank">
-                            Términos y Condiciones
-                        </Link>
-                    </p>
+                    <Link to="/tyc"> Términos y Condiciones </Link>
                 </section>
             </footer>
             <section className='footerSectionCopy'>
