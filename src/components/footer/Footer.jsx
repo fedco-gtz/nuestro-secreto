@@ -1,7 +1,7 @@
 import '../../styles/Footer.css'
 import logo from '../../images/logoFooter.png';
-import facebook from '../../images/Facebook.png';
 import instagram from '../../images/Instagram.png';
+import github from '../../images/Github.png';
 
 function Footer() {
     return (
@@ -12,7 +12,7 @@ function Footer() {
                 </section>
 
                 <section className='socialNetwork'>
-                    <a href="https://www.facebook.com/federico.g.gutierrez2" target="_blank"><img className='socialIcon' alt='Facebook' src={facebook} /></a>&nbsp;&nbsp;&nbsp;
+                    <a href="https://github.com/fedco-gtz" target="_blank"><img className='socialIcon' alt='Github' src={github} /></a>&nbsp;&nbsp;&nbsp;
                     <a href="https://www.instagram.com/grrz.fede/" target="_blank"><img className='socialIcon' alt='Instagram' src={instagram} /></a>
                 </section>
 
