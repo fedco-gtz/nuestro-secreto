@@ -1,39 +1,36 @@
-import { db } from "./firebase";
-import { doc, getDoc, runTransaction, collection, addDoc, getDocs, updateDoc } from "firebase/firestore";
+import { db, auth } from "../services/firebase";
+import { 
+  doc, getDoc, runTransaction, collection, addDoc, 
+  getDocs, updateDoc, arrayUnion, serverTimestamp 
+} from "firebase/firestore";
+import { GoogleAuthProvider, signInWithPopup,  signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from 'react-toastify';
 
 // CREAR SECRETO CON VALIDACIÓN
 export const submitSecret = async ({ text, age, country, acceptedTerms, sex, name }) => {
 
   if (text.trim() === "") {
-    toast.warn("Debes escribir un secreto", {
-      theme: "dark",
-      autoClose: 1500,
-    });
+    toast.warn("Debes escribir un secreto", { theme: "dark", autoClose: 1500 });
     return;
   }
 
   if (Number(age) < 18 || isNaN(Number(age))) {
-    toast.warn("Debes ser mayor de edad", {
-      theme: "dark",
-      autoClose: 1500,
-    });
+    toast.warn("Debes ser mayor de edad", { theme: "dark", autoClose: 1500 });
     return;
   }
 
   if (!country.trim()) {
-    toast.warn("Debes ingresar un país.", {
-      theme: "dark",
-      autoClose: 1500,
-    });
+    toast.warn("Debes ingresar un país.", { theme: "dark", autoClose: 1500 });
     return;
   }
 
   if (!sex) {
-    toast.warn("Debes seleccionar tu sexo.", {
-      theme: "dark",
-      autoClose: 1500,
-    });
+    toast.warn("Debes seleccionar tu sexo.", { theme: "dark", autoClose: 1500 });
+    return;
+  }
+
+  if (!acceptedTerms) {
+    toast.warn("Debes aceptar los Términos y Condiciones", { theme: "dark", autoClose: 1500 });
     return;
   }
 
@@ -46,8 +43,8 @@ export const submitSecret = async ({ text, age, country, acceptedTerms, sex, nam
       const counterDoc = await transaction.get(counterRef);
 
       if (!counterDoc.exists()) {
-        transaction.set(counterRef, { lastNumber: 0 });
-        return 0;
+        transaction.set(counterRef, { lastNumber: 1 });
+        return 1;
       }
 
       const newNumber = counterDoc.data().lastNumber + 1;
@@ -112,5 +109,36 @@ export const voteSecret = async (id, userIP) => {
     await updateDoc(secretRef, updateData);
   } else {
     throw new Error("El secreto no existe.");
+  }
+};
+
+// INICIO DE SESION
+export const loginUser = (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      toast.success(`Sesión iniciada correctamente`, { theme: 'dark', autoClose: 1500 });
+      return user;
+    })
+    .catch((error) => {
+      toast.error('Email o contraseña incorrecta', { theme: 'dark', autoClose: 1500 });
+      throw error;
+    });
+};
+
+// INICIO DE SESIÓN CON GOOGLE
+export const loginWithGoogle = async () => {
+  const provider = new GoogleAuthProvider();
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    toast.success(`Bienvenido ${user.displayName || user.email}`, { theme: 'dark', autoClose: 2000 });
+    return user;
+  } catch (error) {
+    console.error("Error al iniciar sesión con Google:", error);
+    toast.error("No se pudo iniciar sesión con Google", { theme: 'dark', autoClose: 2000 });
+    throw error;
   }
 };

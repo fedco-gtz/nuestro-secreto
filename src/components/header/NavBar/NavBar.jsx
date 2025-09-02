@@ -7,7 +7,7 @@ function NavBar() {
       <ul>
         <Link className="linkCustom" to="/">SECRETOS PUBLICADOS</Link>
         <Link className="linkCustom" to="/publish">PUBLICAR SECRETO</Link>
-        <Link className="linkCustom" to="/moderate">MODERAR SECRETOS</Link>
+        <Link className="linkCustom" to="/login">MODERAR SECRETOS</Link>
       </ul>
     </nav>
   );

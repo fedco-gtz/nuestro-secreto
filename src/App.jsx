@@ -12,6 +12,7 @@ import Footer from "./components/footer/Footer";
 import Published from './pages/published';
 import Publish from './pages/publish';
 import Moderate from './pages/moderate';
+import LoginForm from './pages/login';
 import Tyc from './pages/tyc';
 import NotFound from './pages/NotFound';
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Published />} />
         <Route path='/publish' element={<Publish />} />
+        <Route path='/login' element={<LoginForm />} />
         <Route path='/moderate' element={<Moderate />} />
         <Route path='/tyc' element={<Tyc />} />
         <Route path='*' element={<NotFound />} />
