@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Publish.css'
 import '../styles/Login.css'
+import "../styles/Moderate.css";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -48,35 +49,40 @@ const LoginForm = () => {
     };
 
     return (
-        <form onSubmit={handleLogin} className="loginForm publish-container">
-            <div>
-                <label>Email:</label>
-                <input className="data"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label>Contraseña:</label>
-                <input className="data"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-            </div>
-            <button type="submit" disabled={loading}>
-                {loading ? 'Ingresando...' : 'Iniciar Sesión'}
-            </button>
+        <>
+            <div className="moderate-container">
+                <h1 className="mobile">INICIAR SESIÓN</h1>
+                <form onSubmit={handleLogin} className="loginForm publish-container">
+                    <div>
+                        <label>Email:</label>
+                        <input className="data"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label>Contraseña:</label>
+                        <input className="data"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit" disabled={loading}>
+                        {loading ? 'Ingresando...' : 'Iniciar Sesión'}
+                    </button>
 
-            <hr style={{ margin: "1rem 0" }} />
+                    <hr style={{ margin: "1rem 0" }} />
 
-            <button type="button" onClick={handleGoogleLogin} className="googleBtn">
-                Iniciar sesión con Google
-            </button>
-        </form>
+                    <button type="button" onClick={handleGoogleLogin} className="googleBtn">
+                        Iniciar sesión con Google
+                    </button>
+                </form>
+            </div>
+        </>
     );
 };
 
