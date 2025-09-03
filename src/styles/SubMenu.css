@@ -5,10 +5,11 @@
     width: 100%;
     justify-content: space-evenly !important;
     list-style-type: none;
-    margin-top: 10px !important;
+    margin-top: 5px !important;
     padding: 6px;    
     text-align: center;
     font-weight: bold;
+    height: 50px;
 }
 
 .submenu li a {

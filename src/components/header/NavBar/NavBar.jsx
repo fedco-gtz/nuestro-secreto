@@ -29,7 +29,7 @@ function NavBar() {
         ) : (
           <>
             <Link className="linkCustom" to="/profile">MI PERFIL</Link>
-            <button className="linkCustom logoutBtn" onClick={handleLogout}>
+            <button className="logoutBtn" onClick={handleLogout}>
               CERRAR SESIÓN
             </button>
           </>
