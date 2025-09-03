@@ -1,11 +1,11 @@
 .submenu {
-    background-color: rgba(36, 36, 36, 0.6);
-    position:absolute;
+    background-color: rgba(36, 36, 36, 0.9);
+    position:relative;
     display: flex;
     width: 100%;
     justify-content: space-evenly;
     list-style-type: none;
-    margin: 0;
+    margin-top: 12px !important;
     padding: 6px;    
     text-align: center;
     font-weight: bold;
@@ -17,6 +17,18 @@
 }
 
 .submenu li a:hover {
+    text-decoration: none;
+    color: rgba(212, 255, 64, 0.87);
+    border-bottom-style: solid;
+    border-bottom-color: rgba(212, 255, 64, 0.87);
+}
+
+.linkCustom {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.87);
+}
+
+.linkCustom:hover {
     text-decoration: none;
     color: rgba(212, 255, 64, 0.87);
     border-bottom-style: solid;
