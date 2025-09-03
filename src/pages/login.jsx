@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/Publish.css'
 import '../styles/Login.css'
 import "../styles/Moderate.css";
+import google from '../images/Google.png';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -54,7 +55,7 @@ const LoginForm = () => {
                 <h1 className="mobile">INICIAR SESIÓN</h1>
                 <form onSubmit={handleLogin} className="loginForm publish-container">
                     <div>
-                        <label>Email:</label>
+                        <label>EMAIL</label>
                         <input className="data"
                             type="email"
                             value={email}
@@ -63,7 +64,7 @@ const LoginForm = () => {
                         />
                     </div>
                     <div>
-                        <label>Contraseña:</label>
+                        <label>CONTRASEÑA</label>
                         <input className="data"
                             type="password"
                             value={password}
@@ -72,13 +73,13 @@ const LoginForm = () => {
                         />
                     </div>
                     <button type="submit" disabled={loading}>
-                        {loading ? 'Ingresando...' : 'Iniciar Sesión'}
+                        {loading ? 'INGRESANDO...' : 'INICIAR SESIÓN'}
                     </button>
 
                     <hr style={{ margin: "1rem 0" }} />
 
                     <button type="button" onClick={handleGoogleLogin} className="googleBtn">
-                        Iniciar sesión con Google
+                        <img  alt='Google' src={google} width="25px" height="25px" /> INICIAR SESIÓN CON GOOGLE
                     </button>
                 </form>
             </div>
