@@ -68,4 +68,8 @@
         display: none;
     }
 
+    .linkDesktop {
+        display: flex;
+    }
+
 }
