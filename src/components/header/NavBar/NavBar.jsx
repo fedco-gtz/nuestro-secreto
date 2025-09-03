@@ -23,9 +23,9 @@ function NavBar() {
       <ul>
         <Link className="linkCustom linkMobile" to="/">SECRETOS PUBLICADOS</Link>
         <Link className="linkCustom linkMobile" to="/publish">PUBLICAR SECRETO</Link>
-        <Link to="/sub" onClick={toggleSubmenu} className={`linkCustom ${submenuOpen ? 'active' : ''} linkDesktop`}>SECRETOS{submenuOpen}&nbsp;{submenuOpen ? '▲' : '▼'}</Link>
+        <Link to="/sub" onClick={toggleSubmenu} className={`linkCustom ${submenuOpen ? 'active' : ''} linkDesktop`}>MENÚ{submenuOpen}&nbsp;{submenuOpen ? '▲' : '▼'}</Link>
         {!userSession ? (
-          <Link className="linkCustom" to="/login">MODERAR SECRETOS</Link>
+          <Link className="linkCustom linkMobile" to="/login">MODERAR SECRETOS</Link>
         ) : (
           <>
             <Link className="linkCustom" to="/profile">MI PERFIL</Link>
