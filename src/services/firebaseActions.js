@@ -3,8 +3,6 @@ import { doc, getDoc, runTransaction, collection, addDoc, getDocs, updateDoc, ar
 import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult } from "firebase/auth";
 import { toast } from 'react-toastify';
 
-const auth = getAuth();
-
 // CREAR SECRETO CON VALIDACIÓN
 export const submitSecret = async ({ text, age, country, acceptedTerms, sex, name }) => {
 
@@ -131,9 +129,7 @@ export const loginWithGoogle = async () => {
 
   try {
     if (/Mobi|Android/i.test(navigator.userAgent)) {
-      // En móviles usamos redirect
       await signInWithRedirect(auth, provider);
-      // El resultado se obtiene cuando la app recarga después del redirect
       const result = await getRedirectResult(auth);
       if (result) {
         const user = result.user;
@@ -141,7 +137,6 @@ export const loginWithGoogle = async () => {
         return user;
       }
     } else {
-      // En escritorio seguimos usando popup
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
       toast.success(`Bienvenido ${user.displayName || user.email}`, { theme: 'dark', autoClose: 2000 });
@@ -169,7 +164,6 @@ export const getUserProfile = async () => {
     birthdate: ""
   };
 };
-
 
 // VER DESDE ACA //
 export const createUserInFirestore = async () => {
