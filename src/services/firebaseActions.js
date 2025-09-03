@@ -1,9 +1,6 @@
 import { db, auth } from "../services/firebase";
-import { 
-  doc, getDoc, runTransaction, collection, addDoc, 
-  getDocs, updateDoc, arrayUnion, serverTimestamp 
-} from "firebase/firestore";
-import { GoogleAuthProvider, signInWithPopup,  signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, runTransaction, collection, addDoc, getDocs, updateDoc, arrayUnion, serverTimestamp } from "firebase/firestore";
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from 'react-toastify';
 
 // CREAR SECRETO CON VALIDACIÓN
@@ -141,4 +138,64 @@ export const loginWithGoogle = async () => {
     toast.error("No se pudo iniciar sesión con Google", { theme: 'dark', autoClose: 2000 });
     throw error;
   }
+};
+
+// DATOS DEL PERFIL DEL USUARIO
+export const getUserProfile = async () => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
+
+  const provider = user.providerData[0]?.providerId;
+
+  return {
+    name: user.displayName || "Sin nombre",
+    email: user.email,
+    provider,
+    password: "********",
+    birthdate: ""
+  };
+};
+
+
+// VER DESDE ACA //
+export const createUserInFirestore = async () => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
+
+  const userRef = doc(db, "users", user.uid);
+  await setDoc(userRef, {
+    name: user.displayName || "",
+    email: user.email,
+    birthdate: ""
+  });
+};
+
+// --- Actualizar fecha de nacimiento ---
+export const updateBirthdate = async (birthdate) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
+
+  const userRef = doc(db, "users", user.uid);
+  await setDoc(userRef, { birthdate }, { merge: true });
+};
+
+// --- Actualizar nombre ---
+export const updateUserName = async (name) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
+
+  // Actualizar en Auth
+  await updateProfile(user, { displayName: name });
+
+  // Actualizar en Firestore
+  const userRef = doc(db, "users", user.uid);
+  await setDoc(userRef, { name }, { merge: true });
+};
+
+// --- Actualizar contraseña ---
+export const updateUserPassword = async (newPassword) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
+
+  await updatePassword(user, newPassword);
 };

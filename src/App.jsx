@@ -14,7 +14,8 @@ import Publish from './pages/publish';
 import Moderate from './pages/moderate';
 import LoginForm from './pages/login';
 import Tyc from './pages/tyc';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/notFound';
+import Profile from './pages/profile';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
         <Route path='/publish' element={<Publish />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/moderate' element={<Moderate />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/tyc' element={<Tyc />} />
         <Route path='*' element={<NotFound />} />
       </Routes>

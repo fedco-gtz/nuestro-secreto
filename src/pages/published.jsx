@@ -27,14 +27,12 @@ function Published() {
     loadSecrets();
   };
 
-  // función para dar "me gusta"
   const handleLike = async (id) => {
     const ref = doc(db, "secrets", id);
     await updateDoc(ref, { likes: increment(1) });
     loadSecrets(); // recargar para mostrar el nuevo valor
   };
 
-  // función para compartir (puede usar navigator.share si está disponible)
   const handleShare = (secret) => {
     if (navigator.share) {
       navigator.share({
