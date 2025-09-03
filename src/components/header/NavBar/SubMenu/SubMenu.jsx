@@ -4,9 +4,9 @@ import '../../../../styles/SubMenu.css'
 const SubMenu = () => {
   return (
     <ul className="submenu">
-      <Link className="linkCustom" to="/">SECRETOS PUBLICADOS</Link>
-      <Link className="linkCustom" to="/publish">PUBLICAR SECRETO</Link>
-      <Link className="linkCustom" to="/login">MODERAR SECRETOS</Link>
+      <Link className="linkCustom" to="/">PUBLICADOS</Link>
+      <Link className="linkCustom" to="/publish">PUBLICAR</Link>
+      <Link className="linkCustom" to="/login">MODERAR</Link>
     </ul>
   );
 }
