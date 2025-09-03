@@ -14,7 +14,7 @@ import Publish from './pages/publish';
 import Moderate from './pages/moderate';
 import LoginForm from './pages/login';
 import Tyc from './pages/tyc';
-import NotFound from './pages/notFound';
+import NotFound from './pages/NotFound';
 import Profile from './pages/profile';
 
 function App() {
