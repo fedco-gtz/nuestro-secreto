@@ -28,7 +28,7 @@ function NavBar() {
           <Link className="linkCustom linkMobile" to="/login">MODERAR SECRETOS</Link>
         ) : (
           <>
-            <Link className="linkCustom" to="/moderate">MODERAR SECRETOS</Link>
+            <Link className="linkCustom linkMobile" to="/moderate">MODERAR SECRETOS</Link>
             <Link className="linkCustom" to="/profile">MI PERFIL</Link>
             <button className="logoutBtn" onClick={handleLogout}>
               CERRAR SESIÓN
