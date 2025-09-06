@@ -23,12 +23,12 @@ function NavBar() {
       <ul>
         <Link className="linkCustom linkMobile" to="/">SECRETOS PUBLICADOS</Link>
         <Link className="linkCustom linkMobile" to="/publish">PUBLICAR SECRETO</Link>
-        <Link className="linkCustom linkMobile" to="/moderate">MODERAR SECRETOS</Link>
         <Link to="/sub" onClick={toggleSubmenu} className={`linkCustom ${submenuOpen ? 'active' : ''} linkDesktop`}>MENÚ{submenuOpen}&nbsp;{submenuOpen ? '▲' : '▼'}</Link>
         {!userSession ? (
           <Link className="linkCustom linkMobile" to="/login">MODERAR SECRETOS</Link>
         ) : (
           <>
+            <Link className="linkCustom" to="/moderate">MODERAR SECRETOS</Link>
             <Link className="linkCustom" to="/profile">MI PERFIL</Link>
             <button className="logoutBtn" onClick={handleLogout}>
               CERRAR SESIÓN
