@@ -64,7 +64,7 @@ function Moderate() {
             onClick={() => handleVote(s.id)}
           >
             Votar
-          </button>
+          </button> <span>{s.votes} de 50</span>
         </div>
       ))}
     </div>
