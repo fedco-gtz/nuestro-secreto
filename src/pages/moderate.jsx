@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { db } from "../services/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { voteSecret } from "../services/firebaseActions";
+import { toast } from 'react-toastify';
 import "../styles/Moderate.css";
 
 function Moderate() {
@@ -33,13 +34,12 @@ function Moderate() {
   const handleVote = async (secretId) => {
     const ip = await getUserIP();
     if (!ip) {
-      alert("No se pudo obtener tu IP. Intenta nuevamente.");
+      alert("Intenta nuevamente.");
       return;
     }
 
     try {
       await voteSecret(secretId, ip);
-      alert("¡Tu voto fue registrado!");
       loadSecrets();
     } catch (error) {
       alert(error.message);

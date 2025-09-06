@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { loginUser, loginWithGoogle } from '../services/firebaseActions.js';
+import { loginUser, loginWithGoogle, loginWithGitHub } from '../services/firebaseActions.js';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Publish.css'
 import '../styles/Login.css'
 import "../styles/Moderate.css";
 import google from '../images/Google.png';
+import github from '../images/Github.png';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -49,6 +50,22 @@ const LoginForm = () => {
         }
     };
 
+    const handleGitHubLogin = async () => {
+        try {
+            const user = await loginWithGitHub();
+
+            Cookies.set('userSession', JSON.stringify({
+                email: user.email,
+                uid: user.uid,
+                loginAt: new Date().toISOString()
+            }), { expires: 1 });
+
+            navigate('/moderate');
+        } catch (error) {
+            console.error('Error con GitHub Login:', error);
+        }
+    };
+
     return (
         <>
             <div className="moderate-container">
@@ -79,7 +96,11 @@ const LoginForm = () => {
                     <hr style={{ margin: "1rem 0" }} />
 
                     <button type="button" onClick={handleGoogleLogin} className="googleBtn">
-                        <img  alt='Google' src={google} width="25px" height="25px" /> INICIAR SESIÓN CON GOOGLE
+                        <img alt='Google' src={google} width="25px" height="25px" /> INICIAR SESIÓN CON GOOGLE
+                    </button>
+
+                    <button type="button" onClick={handleGitHubLogin} className="googleBtn">
+                        <img alt='GitHub' src={github} width="25px" height="25px" /> INICIAR SESIÓN CON GITHUB
                     </button>
                 </form>
             </div>

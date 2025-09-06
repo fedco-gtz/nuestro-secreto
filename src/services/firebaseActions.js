@@ -1,6 +1,6 @@
 import { db, auth } from "../services/firebase";
 import { doc, getDoc, runTransaction, collection, addDoc, getDocs, updateDoc, arrayUnion, serverTimestamp } from "firebase/firestore";
-import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, GithubAuthProvider } from "firebase/auth";
 import { toast } from 'react-toastify';
 
 // CREAR SECRETO CON VALIDACIÓN
@@ -80,7 +80,13 @@ export const loadSecrets = async () => {
 
 // MODERAR SECRETO
 export const voteSecret = async (id, userIP) => {
-  if (!userIP) throw new Error("No se pudo obtener la IP del dispositivo.");
+  if (!userIP) {
+    toast.warn("Volvé a intentarlo", {
+      theme: "dark",
+      autoClose: 1500,
+    });
+    return;
+  }
 
   const secretRef = doc(db, "secrets", id);
   const snap = await getDoc(secretRef);
@@ -89,7 +95,11 @@ export const voteSecret = async (id, userIP) => {
     const data = snap.data();
 
     if (data.votersIPs && data.votersIPs.includes(userIP)) {
-      throw new Error("Este dispositivo ya votó este secreto.");
+      toast.warn("Ya votaste este secreto", {
+        theme: "dark",
+        autoClose: 1500,
+      });
+      return;
     }
 
     const newVotes = (data.votes || 0) + 1;
@@ -104,10 +114,17 @@ export const voteSecret = async (id, userIP) => {
     }
 
     await updateDoc(secretRef, updateData);
+
+    toast.success("Tu voto fue registrado", {
+      theme: "dark",
+      autoClose: 1500,
+    });
+
   } else {
     throw new Error("El secreto no existe.");
   }
 };
+
 
 // INICIO DE SESION
 export const loginUser = (email, password) => {
@@ -136,64 +153,81 @@ export const loginWithGoogle = async () => {
   } catch (error) {
     console.error("Error al iniciar sesión con Google:", error);
     toast.error("No se pudo iniciar sesión con Google", { theme: 'dark', autoClose: 2000 });
-  }};
+  }
+};
 
-  // DATOS DEL PERFIL DEL USUARIO
-  export const getUserProfile = async () => {
-    const user = auth.currentUser;
-    if (!user) throw new Error("No hay usuario autenticado");
+// INICIO DE SESIÓN CON GITHUB
+export const loginWithGitHub = async () => {
+  const provider = new GithubAuthProvider();
 
-    const provider = user.providerData[0]?.providerId;
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
 
-    return {
-      name: user.displayName || "Sin nombre",
-      email: user.email,
-      provider,
-      password: "********",
-      birthdate: ""
-    };
+    toast.success(`Bienvenido ${user.displayName || user.email}`, { theme: 'dark', autoClose: 2000 });
+    return user;
+  } catch (error) {
+    console.error("Error al iniciar sesión con GitHub:", error);
+    toast.error("No se pudo iniciar sesión con GitHub", { theme: 'dark', autoClose: 2000 });
+  }
+};
+
+// DATOS DEL PERFIL DEL USUARIO
+export const getUserProfile = async () => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
+
+  const provider = user.providerData[0]?.providerId;
+
+  return {
+    name: user.displayName || "Sin nombre",
+    email: user.email,
+    provider,
+    password: "********",
+    birthdate: ""
   };
+};
 
 
-  // VER DESDE ACA //
-  export const createUserInFirestore = async () => {
-    const user = auth.currentUser;
-    if (!user) throw new Error("No hay usuario autenticado");
+// VER DESDE ACA //
+export const createUserInFirestore = async () => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
 
-    const userRef = doc(db, "users", user.uid);
-    await setDoc(userRef, {
-      name: user.displayName || "",
-      email: user.email,
-      birthdate: ""
-    });
-  };
+  const userRef = doc(db, "users", user.uid);
+  await setDoc(userRef, {
+    name: user.displayName || "",
+    email: user.email,
+    birthdate: ""
+  });
+};
 
-  // --- Actualizar fecha de nacimiento ---
-  export const updateBirthdate = async (birthdate) => {
-    const user = auth.currentUser;
-    if (!user) throw new Error("No hay usuario autenticado");
+// --- Actualizar fecha de nacimiento ---
+export const updateBirthdate = async (birthdate) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
 
-    const userRef = doc(db, "users", user.uid);
-    await setDoc(userRef, { birthdate }, { merge: true });
-  };
+  const userRef = doc(db, "users", user.uid);
+  await setDoc(userRef, { birthdate }, { merge: true });
+};
 
-  // --- Actualizar nombre ---
-  export const updateUserName = async (name) => {
-    const user = auth.currentUser;
-    if (!user) throw new Error("No hay usuario autenticado");
+// --- Actualizar nombre ---
+export const updateUserName = async (name) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
 
-    // Actualizar en Auth
-    await updateProfile(user, { displayName: name });
+  // Actualizar en Auth
+  await updateProfile(user, { displayName: name });
 
-    // Actualizar en Firestore
-    const userRef = doc(db, "users", user.uid);
-    await setDoc(userRef, { name }, { merge: true });
-  };
+  // Actualizar en Firestore
+  const userRef = doc(db, "users", user.uid);
+  await setDoc(userRef, { name }, { merge: true });
+};
 
-  // --- Actualizar contraseña ---
-  export const updateUserPassword = async (newPassword) => {
-    const user = auth.currentUser;
-    if (!user) throw new Error("No hay usuario autenticado");
+// --- Actualizar contraseña ---
+export const updateUserPassword = async (newPassword) => {
+  const user = auth.currentUser;
+  if (!user) throw new Error("No hay usuario autenticado");
 
-    await updatePassword(user, newPassword);
-  };
+  await updatePassword(user, newPassword);
+};
