@@ -135,7 +135,7 @@ export const loginUser = (email, password) => {
       return user;
     })
     .catch((error) => {
-      toast.error('Email o contraseña incorrecta', { theme: 'dark', autoClose: 1500 });
+      toast.error('E-mail o contraseña incorrecta', { theme: 'dark', autoClose: 1500 });
       throw error;
     });
 };
